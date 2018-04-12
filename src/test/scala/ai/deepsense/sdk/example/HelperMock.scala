@@ -30,6 +30,7 @@ import ai.deepsense.deeplang.doperables.dataframe.{DataFrame, DataFrameBuilder}
 import ai.deepsense.deeplang.inference.InferContext
 import ai.deepsense.deeplang.params.custom.InnerWorkflow
 import ai.deepsense.sparkutils.SparkSQLSession
+import ai.deepsense.deeplang.utils.fs.AsIsModelStorageUrlFactory
 
 object HelperMock {
   private lazy val sparkConf: SparkConf = new SparkConf()
@@ -94,8 +95,7 @@ object HelperMock {
       inferContext,
       ExecutionMode.Batch,
       LocalFileSystemClient(),
-      "/tmp",
-      "foo",
+      Locations("/tmp", "foo", new AsIsModelStorageUrlFactory),
       innerWorkflowExecutor,
       ContextualDataFrameStorage(
         dataFrameStorage,
